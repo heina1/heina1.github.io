@@ -143,6 +143,52 @@
           				<iframe class="game-iframe" id="game-area" src="https://1v1lol-unblocked-game.github.io/" width="480" height="800" scrolling="none" frameborder="0" allowfullscreen></iframe>
           			</div>
           		</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XP Bar</title>
+<style>
+  #xp-bar {
+    width: 300px;
+    height: 20px;
+    background-color: #ddd;
+    border-radius: 10px;
+    margin: 20px auto;
+  }
+
+  #xp-progress {
+    height: 100%;
+    background-color: #4caf50;
+    border-radius: 10px;
+    width: 0%;
+    transition: width 0.5s ease;
+  }
+</style>
+</head>
+<body>
+<div id="xp-bar">
+  <div id="xp-progress"></div>
+</div>
+
+<script>
+  // Function to update XP bar
+  function updateXP() {
+    const xpBar = document.getElementById('xp-progress');
+    let currentWidth = parseFloat(xpBar.style.width) || 0;
+    const increment = 20; // XP gained every minute
+    const totalXP = currentWidth + increment;
+    
+    // Update XP bar width
+    xpBar.style.width = totalXP > 100 ? '100%' : `${totalXP}%`;
+  }
+
+  // Update XP every minute
+  setInterval(updateXP, 60000); // 60 seconds = 60000 milliseconds
+</script>
+</body>
+</html>
 
 
           		<div class="game-info">
