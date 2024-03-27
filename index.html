@@ -148,47 +148,123 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>XP Bar</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
 <style>
+  body {
+    font-family: 'Press Start 2P', sans-serif; /* Use the custom font 'Press Start 2P' */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #333;
+    color: yellow; /* Text color */
+  }
+
+  #xp-container {
+    width: 400px; /* Increased box size */
+    text-align: center;
+  }
+
+  #xp-box {
+    background-color: black;
+    padding: 30px; /* Increased padding */
+    border-radius: 20px; /* Increased border radius */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Align items to the center */
+    justify-content: center; /* Center items vertically */
+  }
+
   #xp-bar {
-    width: 300px;
-    height: 20px;
+    width: calc(100% - 60px); /* Adjusted to compensate for padding */
+    height: 30px; /* Increased height */
     background-color: #ddd;
-    border-radius: 10px;
-    margin: 20px auto;
+    border-radius: 15px; /* Increased border radius */
+    margin-top: auto; /* Push the bar to the bottom */
+    position: relative; /* Required for child absolute positioning */
   }
 
   #xp-progress {
+    position: absolute;
+    bottom: 0; /* Align the progress bar to the bottom */
+    left: 0;
     height: 100%;
-    background-color: #4caf50;
-    border-radius: 10px;
+    background-color: yellow; /* Changed to yellow */
+    border-radius: 15px; /* Increased border radius */
     width: 0%;
     transition: width 0.5s ease;
+  }
+
+  #xp-info {
+    font-size: 14px; /* Decreased text size */
+    margin-top: 5px; /* Adjusted margin */
+    color: yellow; /* Text color */
+    text-align: left; /* Align text to the left */
+    width: 100%;
+  }
+
+  #minute-counter {
+    font-size: 14px; /* Decreased text size */
+    margin-top: 5px; /* Adjusted margin */
+    color: yellow; /* Text color */
+    text-align: right; /* Align text to the right */
+    width: 100%;
+  }
+
+  #above-bar-text {
+    font-size: 16px; /* Decreased text size */
+    margin-bottom: 5px; /* Adjusted margin */
+    color: yellow;
+    text-align: left; /* Align text to the left */
+    width: 100%;
   }
 </style>
 </head>
 <body>
-<div id="xp-bar">
-  <div id="xp-progress"></div>
+<div id="xp-container">
+  <div id="xp-box">
+    <div id="above-bar-text">Try to complete the bar!</div>
+    <div id="xp-bar">
+      <div id="xp-progress"></div>
+    </div>
+    <div id="xp-info">0 XP</div>
+    <div id="minute-counter">0 minutes</div>
+  </div>
 </div>
 
 <script>
-  // Function to update XP bar
+  let totalMinutes = parseInt(localStorage.getItem('totalMinutes')) || 0;
+  let currentXP = totalMinutes * 20;
+  let level = parseInt(localStorage.getItem('level')) || 1;
+
   function updateXP() {
     const xpBar = document.getElementById('xp-progress');
-    let currentWidth = parseFloat(xpBar.style.width) || 0;
-    const increment = 20; // XP gained every minute
-    const totalXP = currentWidth + increment;
-    
-    // Update XP bar width
-    xpBar.style.width = totalXP > 100 ? '100%' : `${totalXP}%`;
+    const xpInfo = document.getElementById('xp-info');
+    const minuteCounter = document.getElementById('minute-counter');
+
+    totalMinutes++; // Increment total minutes on site
+    if (totalMinutes > 100) totalMinutes = 100; // Cap total minutes at 100
+    currentXP = totalMinutes * 20; // Calculate current XP
+
+    xpBar.style.width = (totalMinutes / 100) * 100 + '%'; // Calculate width as percentage
+    xpInfo.textContent = `${currentXP} XP`; // Display current XP
+    minuteCounter.textContent = `${totalMinutes} minutes`; // Display total minutes
+
+    // Save total minutes and level to localStorage
+    localStorage.setItem('totalMinutes', totalMinutes);
   }
 
-  // Update XP every minute
-  setInterval(updateXP, 60000); // 60 seconds = 60000 milliseconds
+  setInterval(updateXP, 60000); // Update XP every minute
+
+  // Run updateXP once on page load to initialize values
+  updateXP();
 </script>
 </body>
 </html>
+
 
 
           		<div class="game-info">
