@@ -143,11 +143,13 @@
           				<iframe class="game-iframe" id="game-area" src="https://1v1lol-unblocked-game.github.io/" width="480" height="800" scrolling="none" frameborder="0" allowfullscreen></iframe>
           			</div>
           		</div>
-<!DOCTYPE html>
+
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
 <style>
   body {
     margin: 0;
@@ -158,7 +160,7 @@
     height: 100vh;
     background-color: #333;
     color: yellow; /* Text color */
-    font-family: Arial, sans-serif; /* Default font */
+    font-family: 'Press Start 2P', sans-serif; /* Use the custom font 'Press Start 2P' */
   }
 
   #xp-container {
@@ -240,7 +242,12 @@
 </div>
 
 <script>
-  let totalMinutes = parseInt(localStorage.getItem('totalMinutes')) || 0;
+  let totalMinutes = parseInt(localStorage.getItem('totalMinutes'));
+  if (!totalMinutes) {
+    totalMinutes = 0;
+    localStorage.setItem('totalMinutes', totalMinutes);
+  }
+
   let currentXP = totalMinutes * 20;
   let level = parseInt(localStorage.getItem('level')) || 1;
 
