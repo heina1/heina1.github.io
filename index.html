@@ -143,8 +143,7 @@
           				<iframe class="game-iframe" id="game-area" src="https://1v1lol-unblocked-game.github.io/" width="480" height="800" scrolling="none" frameborder="0" allowfullscreen></iframe>
           			</div>
           		</div>
-
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -256,8 +255,9 @@
     const xpInfo = document.getElementById('xp-info');
     const minuteCounter = document.getElementById('minute-counter');
 
-    totalMinutes++; // Increment total minutes on site
-    if (totalMinutes > 100) totalMinutes = 100; // Cap total minutes at 100
+    if (totalMinutes < 100) {
+      totalMinutes++; // Increment total minutes on site
+    }
     currentXP = totalMinutes * 20; // Calculate current XP
 
     xpBar.style.width = (totalMinutes / 100) * 100 + '%'; // Calculate width as percentage
@@ -276,7 +276,10 @@
 </body>
 </html>
 
-			
+
+
+
+
 
 
           		<div class="game-info">
